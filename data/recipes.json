@@ -1,0 +1,56 @@
+[
+  {
+    "id": "puttu-kadala",
+    "title": "Puttu & Kadala Curry",
+    "image": "img/recipe-default.png",
+    "ingredients": ["Puttu flour", "Grated coconut", "Black chickpeas", "Onion", "Spices"],
+    "instructions": "Steam the puttu; cook kadala with onion and spices until soft and flavorful.",
+    "time": "30 mins",
+    "servings": 2
+  },
+  {
+    "id": "idli-sambar",
+    "title": "Idli & Sambar",
+    "image": "img/recipe-default.png",
+    "ingredients": ["Rice", "Urad dal", "Vegetables", "Tamarind", "Spices"],
+    "instructions": "Soak and grind batter, ferment overnight. Steam idlis. Prepare sambar with vegetables and tamarind.",
+    "time": "45 mins",
+    "servings": 3
+  },
+  {
+    "id": "chapati-eggroast",
+    "title": "Chapati & Egg Roast",
+    "image": "img/recipe-default.png",
+    "ingredients": ["Wheat flour", "Eggs", "Onion", "Tomato", "Chili", "Spices"],
+    "instructions": "Make dough and cook chapatis. For egg roast, sauté onion and spices, add boiled eggs.",
+    "time": "40 mins",
+    "servings": 2
+  },
+  {
+    "id": "puttu-kadala",
+    "title": "Puttu & Kadala Curry",
+    "image": "img/recipe-default.png",
+    "ingredients": ["Puttu flour", "Grated coconut", "Black chickpeas", "Onion", "Spices"],
+    "instructions": "Steam the puttu; cook kadala with onion and spices until soft and flavorful.",
+    "time": "30 mins",
+    "servings": 2
+  },
+  {
+    "id": "idli-sambar",
+    "title": "Idli & Sambar",
+    "image": "img/recipe-default.png",
+    "ingredients": ["Rice", "Urad dal", "Vegetables", "Tamarind", "Spices"],
+    "instructions": "Soak and grind batter, ferment overnight. Steam idlis. Prepare sambar with vegetables and tamarind.",
+    "time": "45 mins",
+    "servings": 3
+  },
+  {
+    "id": "chapati-eggroast",
+    "title": "Chapati & Egg Roast",
+    "image": "img/recipe-default.png",
+    "ingredients": ["Wheat flour", "Eggs", "Onion", "Tomato", "Chili", "Spices"],
+    "instructions": "Make dough and cook chapatis. For egg roast, sauté onion and spices, add boiled eggs.",
+    "time": "40 mins",
+    "servings": 2
+  }
+]

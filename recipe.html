@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Recipe Details – Maria’s Organics" />
+  <title>Recipe • Maria’s Organics</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+
+  <style>
+    :root{
+      --primary:#3a7c3a;--primary-light:#6fbc6f;--bg:#fdfcf8;--white:#fff;--shadow:0 10px 25px rgba(0,0,0,.1);--curve:1.25rem
+    }
+    *,*:before,*:after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Poppins',sans-serif;background:var(--bg);color:#333}
+    a{text-decoration:none}
+
+    .navbar{display:flex;align-items:center;justify-content:flex-start;padding:.85rem 1.25rem;background:rgba(255,255,255,.75);backdrop-filter:blur(10px);border-radius:0 0 var(--curve) var(--curve);box-shadow:var(--shadow)}
+    .navbar a{color:var(--primary);font-weight:600;font-size:1rem;display:flex;align-items:center;gap:.4rem}
+    .navbar a:hover{color:var(--primary-light)}
+
+    .banner{position:relative;min-height:38vh;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--white);border-bottom-left-radius:var(--curve);border-bottom-right-radius:var(--curve);overflow:hidden}
+    .banner::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(58,124,58,.9)0%,rgba(0,0,0,.45)100%),url('img/bg.png') center/cover no-repeat;}
+
+    .banner h1{position:relative;z-index:1;font-size:clamp(1.8rem,5vw,2.6rem);font-weight:700}
+    .banner p{position:relative;z-index:1;font-size:.96rem;margin-top:.6rem}
+
+    .container{max-width:960px;margin-inline:auto;padding:2rem 1rem}
+    .grid{display:grid;gap:2rem}
+    @media(min-width:768px){.grid{grid-template-columns:1fr 1fr}}
+
+    .card{background:var(--white);border-radius:var(--curve);overflow:hidden;box-shadow:var(--shadow)}
+    .card img{width:100%;height:280px;object-fit:cover}
+    .card-body{padding:2rem}
+
+    h3{margin:1.4rem 0 .9rem;font-size:1.15rem;font-weight:600}
+    .ingredients ul{list-style:square;padding-left:1.3rem}
+    .ingredients li{margin:.3rem 0;font-size:.95rem}
+
+    .btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--primary);color:var(--white);padding:.55rem 1.3rem;border:none;border-radius:999px;cursor:pointer;font-size:.9rem;font-weight:500;transition:.3s}
+    .btn:hover{background:var(--primary-light)}
+
+    footer{text-align:center;background:var(--primary);color:var(--white);padding:1rem;margin-top:4rem;border-top-left-radius:var(--curve);border-top-right-radius:var(--curve);font-size:.8rem}
+  </style>
+</head>
+<body>
+  <nav class="navbar"><a href="index.html"><i class="fas fa-angle-left"></i>Back</a></nav>
+
+  <header class="banner">
+    <div>
+      <h1 id="recipeTitle">Loading…</h1>
+      <p id="recipeSubtitle"></p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="grid">
+      <div class="card"><img id="recipeImg" src="" alt="" /></div>
+      <div class="card-body">
+        <h3>Ingredients</h3>
+        <div class="ingredients"><ul id="ingredientsList"></ul></div>
+
+        <h3>Instructions</h3>
+        <p id="instructionsText"></p>
+
+        <button class="btn mt-3" onclick="window.print()"><i class="fas fa-print"></i> Print</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>&copy; <span id="year"></span> Maria’s Organics.</footer>
+
+  <script>
+    document.getElementById('year').textContent=new Date().getFullYear();
+    const qs=q=>new URLSearchParams(location.search).get(q);
+
+    async function loadRecipe(){
+      const id=qs('id');
+      const res=await fetch('data/recipes.json');
+      const data=await res.json();
+      const r=data.find(el=>el.id===id);
+      if(!r){document.body.innerHTML='<p style=\"padding:2rem\">Recipe not found.</p>';return;}
+
+      document.title=r.title+' • Maria’s Organics';
+      recipeTitle.textContent=r.title;
+      recipeSubtitle.innerHTML=`<i class=\"far fa-clock\"></i> ${r.time} &nbsp;|&nbsp; <i class=\"fas fa-user-friends\"></i> ${r.servings}`;
+      recipeImg.src=r.image; recipeImg.alt=r.title;
+      ingredientsList.innerHTML=r.ingredients.map(i=>`<li>${i}</li>`).join('');
+      instructionsText.textContent=r.instructions;
+    }
+    loadRecipe();
+  </script>
+</body>
+</html>
