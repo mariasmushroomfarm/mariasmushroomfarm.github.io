@@ -33,7 +33,7 @@
     .brand svg{width:26px;height:26px;fill:var(--primary)}
 
     /* Hero */
-    .hero{min-height:60vh;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--white);position:relative;overflow:hidden;border-bottom-left-radius:var(--curve);border-bottom-right-radius:var(--curve)}
+    .hero{height:45vh;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--white);position:relative;overflow:hidden;border-bottom-left-radius:var(--curve);border-bottom-right-radius:var(--curve)}
     .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(58,124,58,.88)0%,rgba(0,0,0,.45)100%),url('img/bg.png') center/cover no-repeat;filter:brightness(0.95)}
     .hero-content{position:relative;max-width:720px;padding:0 1.2rem;animation:fadeUp .9s ease-out forwards;opacity:0;transform:translateY(20px)}
     @keyframes fadeUp{to{opacity:1;transform:none}}
@@ -42,18 +42,21 @@
 
     /* Recipes Section */
     .section-recipes{padding:4.75rem 1rem 6rem;margin-top:calc(60px + var(--curve));}
-    .search-box{position:relative;max-width:620px;margin:0 auto 3rem}
+    @media (max-width:768px) {
+      .section-recipes { margin-top: -1rem; padding-top: 2.8rem; }
+    }
+    .search-box{position:relative;max-width:620px;margin:0 auto 2rem}
     .search-box i{position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:#a5a5a5}
     #searchInput{width:100%;padding:.75rem 1.25rem .75rem 3rem;border:none;border-radius:999px;background:var(--white);box-shadow:var(--shadow)}
 
-    .grid{display:grid;gap:2rem}
+    .grid{display:grid;gap:1.5rem}
     @media(min-width:540px){.grid{grid-template-columns:repeat(2,1fr)}}
     @media(min-width:960px){.grid{grid-template-columns:repeat(3,1fr)}}
 
     .recipe-card{display:flex;flex-direction:column;background:var(--white);border-radius:1.25rem;overflow:hidden;box-shadow:var(--shadow);transition:transform .35s ease,box-shadow .35s ease}
     .recipe-card:hover{transform:translateY(-6px);box-shadow:0 14px 36px rgba(0,0,0,.12)}
     .recipe-card img{width:100%;aspect-ratio:4/3;object-fit:cover}
-    .recipe-card-body{flex-grow:1;padding:1.35rem 1.6rem;display:flex;flex-direction:column}
+    .recipe-card-body{flex-grow:1;padding:1.25rem 1.5rem;display:flex;flex-direction:column}
     .recipe-card h5{font-weight:600;margin-bottom:.35rem;font-size:1rem}
     .meta{font-size:.85rem;color:#666;margin-bottom:1rem}
     .btn-primary{margin-top:auto;display:inline-block;text-align:center;background:var(--primary);color:var(--white);padding:.55rem 1.2rem;border:none;border-radius:999px;font-size:.9rem;font-weight:500;transition:.3s}
@@ -104,17 +107,14 @@
 
   <!-- Scripts -->
   <script>
-    // Year
     document.getElementById('year').textContent=new Date().getFullYear();
 
-    // Sticky navbar background toggle
     const nav=document.getElementById('mainNav');
     const hero=document.getElementById('hero');
     new IntersectionObserver(entries=>{
       entries.forEach(e=>nav.classList.toggle('scrolled',!e.isIntersecting));
     }).observe(hero);
 
-    /* Load & Render Recipes */
     async function loadRecipes(){
       const res=await fetch('data/recipes.json');
       const recipes=await res.json();
@@ -142,7 +142,7 @@
         for(let i=1;i<=pages;i++){
           const li=document.createElement('li');li.className=`page-item ${i===page?'active':''}`;
           li.innerHTML=`<a class="page-link" href="#">${i}</a>`;
-          li.onclick=e=>{e.preventDefault();page=i;render();window.scrollTo({top:list.offsetTop-110,behavior:'smooth'});};;
+          li.onclick=e=>{e.preventDefault();page=i;render();window.scrollTo({top:list.offsetTop-110,behavior:'smooth'});};
           pag.appendChild(li);
         }
       }

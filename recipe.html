@@ -6,58 +6,79 @@
   <meta name="description" content="Recipe Details – Maria’s Organics" />
   <title>Recipe • Maria’s Organics</title>
 
+  <!-- Google Font & Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
 
+  <!-- Favicon -->
+  <link rel="icon" href="img/icon.png" type="image/png" />
+
   <style>
-    :root{
-      --primary:#3a7c3a;--primary-light:#6fbc6f;--bg:#fdfcf8;--white:#fff;--shadow:0 10px 25px rgba(0,0,0,.1);--curve:1.25rem
+    :root {
+      --primary:#3a7c3a;
+      --primary-light:#6fbc6f;
+      --bg:#fdfcf8;
+      --white:#ffffff;
+      --shadow:0 10px 25px rgba(0,0,0,.08);
+      --curve:1.25rem;
     }
     *,*:before,*:after{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:'Poppins',sans-serif;background:var(--bg);color:#333}
-    a{text-decoration:none}
+    html, body { height: 100%; }
+    body{font-family:'Poppins',sans-serif;background:var(--bg);color:#333;-webkit-font-smoothing:antialiased}
+    a{text-decoration:none;color:inherit}
 
-    .navbar{display:flex;align-items:center;justify-content:flex-start;padding:.85rem 1.25rem;background:rgba(255,255,255,.75);backdrop-filter:blur(10px);border-radius:0 0 var(--curve) var(--curve);box-shadow:var(--shadow)}
-    .navbar a{color:var(--primary);font-weight:600;font-size:1rem;display:flex;align-items:center;gap:.4rem}
-    .navbar a:hover{color:var(--primary-light)}
+    .navbar{position:fixed;top:0;left:50%;transform:translateX(-50%);width:95%;max-width:1200px;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.25rem;background:rgba(255,255,255,.75);backdrop-filter:blur(12px);border-radius:0 0 var(--curve) var(--curve);box-shadow:var(--shadow);z-index:1000;transition:background .3s ease}
+    .navbar.scrolled{background:rgba(255,255,255,.92)}
+    .brand{display:flex;align-items:center;gap:.55rem;font-weight:600;font-size:1rem;color:var(--primary)}
+    .brand svg{width:26px;height:26px;fill:var(--primary)}
+    .back-btn{display:inline-flex;align-items:center;gap:.35rem;background:var(--primary);color:var(--white);padding:.45rem 1.1rem;border:none;border-radius:999px;font-size:.85rem;font-weight:500;transition:.3s}
+    .back-btn:hover{background:var(--primary-light)}
 
-    .banner{position:relative;min-height:38vh;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--white);border-bottom-left-radius:var(--curve);border-bottom-right-radius:var(--curve);overflow:hidden}
-    .banner::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(58,124,58,.9)0%,rgba(0,0,0,.45)100%),url('img/bg.png') center/cover no-repeat;}
+    .banner{position:relative;height:45vh;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--white);border-bottom-left-radius:var(--curve);border-bottom-right-radius:var(--curve);overflow:hidden;margin-top:0}
+    .banner::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(58,124,58,.9)0%,rgba(0,0,0,.45)100%),url('img/bg.png') center/cover no-repeat;filter:brightness(.95)}
+    .banner h1{position:relative;z-index:1;font-size:clamp(1.9rem,5vw,2.7rem);font-weight:700;line-height:1.2;padding:0 1rem;}
+    .banner p{position:relative;z-index:1;font-size:.98rem;margin-top:.7rem;padding:0 1rem;}
 
-    .banner h1{position:relative;z-index:1;font-size:clamp(1.8rem,5vw,2.6rem);font-weight:700}
-    .banner p{position:relative;z-index:1;font-size:.96rem;margin-top:.6rem}
+    .container{max-width:960px;margin-inline:auto;padding:1.5rem 1rem 2.5rem}
+    .grid{display:grid;gap:2rem;align-items:start}
+    @media(min-width:768px){.grid{grid-template-columns:minmax(0, 1fr) minmax(0, 1fr)}}
 
-    .container{max-width:960px;margin-inline:auto;padding:2rem 1rem}
-    .grid{display:grid;gap:2rem}
-    @media(min-width:768px){.grid{grid-template-columns:1fr 1fr}}
+    .card{background:var(--white);border-radius:var(--curve);overflow:hidden;box-shadow:var(--shadow);height:100%;display:flex;flex-direction:column}
+    .recipe-photo{flex:0 0 auto;width:100%;height:260px;background-color:#f2f0eb;background-size:cover;background-position:center;border-bottom:1px solid #eee}
+    .card-body{padding:2rem 1.6rem}
 
-    .card{background:var(--white);border-radius:var(--curve);overflow:hidden;box-shadow:var(--shadow)}
-    .card img{width:100%;height:280px;object-fit:cover}
-    .card-body{padding:2rem}
-
-    h3{margin:1.4rem 0 .9rem;font-size:1.15rem;font-weight:600}
+    h3{margin:1.2rem 0 .8rem;font-size:1.15rem;font-weight:600}
     .ingredients ul{list-style:square;padding-left:1.3rem}
     .ingredients li{margin:.3rem 0;font-size:.95rem}
 
-    .btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--primary);color:var(--white);padding:.55rem 1.3rem;border:none;border-radius:999px;cursor:pointer;font-size:.9rem;font-weight:500;transition:.3s}
-    .btn:hover{background:var(--primary-light)}
+    .btn-print{display:inline-flex;align-items:center;gap:.4rem;background:var(--primary);color:var(--white);padding:.55rem 1.25rem;border:none;border-radius:999px;cursor:pointer;font-size:.9rem;font-weight:500;transition:.3s;margin-top:1rem}
+    .btn-print:hover{background:var(--primary-light)}
 
-    footer{text-align:center;background:var(--primary);color:var(--white);padding:1rem;margin-top:4rem;border-top-left-radius:var(--curve);border-top-right-radius:var(--curve);font-size:.8rem}
+    footer{text-align:center;background:var(--primary);color:var(--white);padding:1rem;border-top-left-radius:var(--curve);border-top-right-radius:var(--curve);font-size:.8rem}
   </style>
 </head>
 <body>
-  <nav class="navbar"><a href="index.html"><i class="fas fa-angle-left"></i>Back</a></nav>
+  <!-- Navbar -->
+  <nav class="navbar" id="mainNav">
+    <div class="brand">
+      <svg viewBox="0 0 24 24"><path d="M12 2C7 3 2 8 2 14c0 4.4 3.6 8 8 8 6 0 11-5 10-11 0-5-5-9-10-9Zm0 18c-3.3 0-6-2.7-6-6 0-4.5 3.5-8.2 8-8 3 0 6 3 6 6 0 4-4 8-8 8Z"/></svg>
+      Maria’s Organics
+    </div>
+    <a href="index.html" class="back-btn"><i class="fas fa-angle-left"></i> Back</a>
+  </nav>
 
-  <header class="banner">
+  <!-- Banner -->
+  <header class="banner" id="banner">
     <div>
       <h1 id="recipeTitle">Loading…</h1>
       <p id="recipeSubtitle"></p>
     </div>
   </header>
 
+  <!-- Content -->
   <main class="container">
     <div class="grid">
-      <div class="card"><img id="recipeImg" src="" alt="" /></div>
+      <div class="card"><div id="recipePhoto" class="recipe-photo"></div></div>
       <div class="card-body">
         <h3>Ingredients</h3>
         <div class="ingredients"><ul id="ingredientsList"></ul></div>
@@ -65,28 +86,36 @@
         <h3>Instructions</h3>
         <p id="instructionsText"></p>
 
-        <button class="btn mt-3" onclick="window.print()"><i class="fas fa-print"></i> Print</button>
+        <button class="btn-print" onclick="window.print()"><i class="fas fa-print"></i> Print Recipe</button>
       </div>
     </div>
   </main>
 
+  <!-- Footer -->
   <footer>&copy; <span id="year"></span> Maria’s Organics.</footer>
 
+  <!-- Script -->
   <script>
     document.getElementById('year').textContent=new Date().getFullYear();
-    const qs=q=>new URLSearchParams(location.search).get(q);
 
+    const nav=document.getElementById('mainNav');
+    const banner=document.getElementById('banner');
+    new IntersectionObserver(entries=>{
+      entries.forEach(e=>nav.classList.toggle('scrolled',!e.isIntersecting));
+    }).observe(banner);
+
+    const qs=key=>new URLSearchParams(location.search).get(key);
     async function loadRecipe(){
       const id=qs('id');
       const res=await fetch('data/recipes.json');
       const data=await res.json();
       const r=data.find(el=>el.id===id);
-      if(!r){document.body.innerHTML='<p style=\"padding:2rem\">Recipe not found.</p>';return;}
+      if(!r){document.body.innerHTML='<p style="padding:2rem">Recipe not found.</p>';return;}
 
       document.title=r.title+' • Maria’s Organics';
       recipeTitle.textContent=r.title;
-      recipeSubtitle.innerHTML=`<i class=\"far fa-clock\"></i> ${r.time} &nbsp;|&nbsp; <i class=\"fas fa-user-friends\"></i> ${r.servings}`;
-      recipeImg.src=r.image; recipeImg.alt=r.title;
+      recipeSubtitle.innerHTML=`<i class='far fa-clock'></i> ${r.time} &nbsp;|&nbsp; <i class='fas fa-user-friends'></i> ${r.servings}`;
+      document.getElementById('recipePhoto').style.backgroundImage = `url('${r.image}')`;
       ingredientsList.innerHTML=r.ingredients.map(i=>`<li>${i}</li>`).join('');
       instructionsText.textContent=r.instructions;
     }
