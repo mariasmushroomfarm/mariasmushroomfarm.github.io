@@ -9,60 +9,216 @@
   <!-- Google Font & Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
-
-  <!-- Favicon -->
   <link rel="icon" href="img/icon.png" type="image/png" />
 
   <style>
     :root {
-      --primary:#3a7c3a;
-      --primary-light:#6fbc6f;
-      --bg:#fdfcf8;
-      --white:#ffffff;
-      --shadow:0 10px 25px rgba(0,0,0,.08);
-      --curve:1.25rem;
+      --primary: #3a7c3a;
+      --primary-light: #6fbc6f;
+      --bg: #fdfcf8;
+      --white: #ffffff;
+      --shadow: 0 10px 25px rgba(0,0,0,.08);
+      --curve: 1.25rem;
     }
-    *,*:before,*:after{box-sizing:border-box;margin:0;padding:0}
+    *, *:before, *:after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; }
-    body{font-family:'Poppins',sans-serif;background:var(--bg);color:#333;-webkit-font-smoothing:antialiased}
-    a{text-decoration:none;color:inherit}
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: #333;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { text-decoration: none; color: inherit; }
 
-    .navbar{position:fixed;top:0;left:50%;transform:translateX(-50%);width:95%;max-width:1200px;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.25rem;background:rgba(255,255,255,.75);backdrop-filter:blur(12px);border-radius:0 0 var(--curve) var(--curve);box-shadow:var(--shadow);z-index:1000;transition:background .3s ease}
-    .navbar.scrolled{background:rgba(255,255,255,.92)}
-    .brand{display:flex;align-items:center;gap:.55rem;font-weight:600;font-size:1rem;color:var(--primary)}
-    .brand svg{width:26px;height:26px;fill:var(--primary)}
-    .back-btn{display:inline-flex;align-items:center;gap:.35rem;background:var(--primary);color:var(--white);padding:.45rem 1.1rem;border:none;border-radius:999px;font-size:.85rem;font-weight:500;transition:.3s}
-    .back-btn:hover{background:var(--primary-light)}
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 95%;
+      max-width: 1200px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .85rem 1.25rem;
+      background: rgba(255, 255, 255, .75);
+      backdrop-filter: blur(12px);
+      border-radius: 0 0 var(--curve) var(--curve);
+      box-shadow: var(--shadow);
+      z-index: 1000;
+      transition: background .3s ease;
+    }
+    .navbar.scrolled { background: rgba(255,255,255,.92); }
 
-    .banner{position:relative;height:45vh;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--white);border-bottom-left-radius:var(--curve);border-bottom-right-radius:var(--curve);overflow:hidden;margin-top:0}
-    .banner::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(58,124,58,.9)0%,rgba(0,0,0,.45)100%),url('img/bg.png') center/cover no-repeat;filter:brightness(.95)}
-    .banner h1{position:relative;z-index:1;font-size:clamp(1.9rem,5vw,2.7rem);font-weight:700;line-height:1.2;padding:0 1rem;}
-    .banner p{position:relative;z-index:1;font-size:.98rem;margin-top:.7rem;padding:0 1rem;}
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--primary);
+    }
+    .brand-logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
 
-    .container{max-width:960px;margin-inline:auto;padding:1.5rem 1rem 2.5rem}
-    .grid{display:grid;gap:2rem;align-items:start}
-    @media(min-width:768px){.grid{grid-template-columns:minmax(0, 1fr) minmax(0, 1fr)}}
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      background: var(--primary);
+      color: var(--white);
+      padding: .45rem 1.1rem;
+      border: none;
+      border-radius: 999px;
+      font-size: .85rem;
+      font-weight: 500;
+      transition: .3s;
+    }
+    .back-btn:hover { background: var(--primary-light); }
 
-    .card{background:var(--white);border-radius:var(--curve);overflow:hidden;box-shadow:var(--shadow);height:100%;display:flex;flex-direction:column}
-    .recipe-photo{flex:0 0 auto;width:100%;height:260px;background-color:#f2f0eb;background-size:cover;background-position:center;border-bottom:1px solid #eee}
-    .card-body{padding:2rem 1.6rem}
+    /* Banner */
+    .banner {
+      position: relative;
+      height: 45vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--white);
+      border-bottom-left-radius: var(--curve);
+      border-bottom-right-radius: var(--curve);
+      overflow: hidden;
+      margin-top: 0;
+    }
+    .banner::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(58,124,58,.9) 0%, rgba(0,0,0,.45) 100%), url('img/bg.png') center/cover no-repeat;
+      filter: brightness(.95);
+    }
+    .banner h1 {
+      position: relative;
+      z-index: 1;
+      font-size: clamp(1.9rem, 5vw, 2.7rem);
+      font-weight: 700;
+      line-height: 1.2;
+      padding: 0 1rem;
+    }
+    .banner p {
+      position: relative;
+      z-index: 1;
+      font-size: .98rem;
+      margin-top: .7rem;
+      padding: 0 1rem;
+    }
 
-    h3{margin:1.2rem 0 .8rem;font-size:1.15rem;font-weight:600}
-    .ingredients ul{list-style:square;padding-left:1.3rem}
-    .ingredients li{margin:.3rem 0;font-size:.95rem}
+    .container {
+      max-width: 960px;
+      margin-inline: auto;
+      padding: 1.5rem 1rem 2.5rem;
+    }
+    .grid {
+      display: grid;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (min-width: 768px) {
+      .grid {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      }
+    }
 
-    .btn-print{display:inline-flex;align-items:center;gap:.4rem;background:var(--primary);color:var(--white);padding:.55rem 1.25rem;border:none;border-radius:999px;cursor:pointer;font-size:.9rem;font-weight:500;transition:.3s;margin-top:1rem}
-    .btn-print:hover{background:var(--primary-light)}
+    .card {
+      background: var(--white);
+      border-radius: var(--curve);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .recipe-photo {
+      flex: 0 0 auto;
+      width: 100%;
+      height: 260px;
+      background-color: #f2f0eb;
+      background-size: cover;
+      background-position: center;
+      border-bottom: 1px solid #eee;
+    }
+    .card-body {
+      padding: 2rem 1.6rem;
+    }
 
-    footer{text-align:center;background:var(--primary);color:var(--white);padding:1rem;border-top-left-radius:var(--curve);border-top-right-radius:var(--curve);font-size:.8rem}
+    h3 {
+      margin: 1.2rem 0 .8rem;
+      font-size: 1.15rem;
+      font-weight: 600;
+    }
+    .ingredients ul {
+      list-style: square;
+      padding-left: 1.3rem;
+    }
+    .ingredients li {
+      margin: .3rem 0;
+      font-size: .95rem;
+    }
+
+    .btn-print {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      background: var(--primary);
+      color: var(--white);
+      padding: .55rem 1.25rem;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: .9rem;
+      font-weight: 500;
+      transition: .3s;
+      margin-top: 1rem;
+    }
+    .btn-print:hover { background: var(--primary-light); }
+
+    footer {
+      text-align: center;
+      background: var(--primary);
+      color: var(--white);
+      padding: 1rem;
+      border-top-left-radius: var(--curve);
+      border-top-right-radius: var(--curve);
+      font-size: .8rem;
+    }
+
+    @media (max-width: 480px) {
+      .brand {
+        font-size: 0.82rem;
+        gap: 0.4rem;
+      }
+      .brand-logo {
+        width: 26px;
+        height: 26px;
+      }
+      .back-btn {
+        padding: .4rem .9rem;
+        font-size: .75rem;
+      }
+    }
   </style>
 </head>
 <body>
   <!-- Navbar -->
   <nav class="navbar" id="mainNav">
     <div class="brand">
-      <svg viewBox="0 0 24 24"><path d="M12 2C7 3 2 8 2 14c0 4.4 3.6 8 8 8 6 0 11-5 10-11 0-5-5-9-10-9Zm0 18c-3.3 0-6-2.7-6-6 0-4.5 3.5-8.2 8-8 3 0 6 3 6 6 0 4-4 8-8 8Z"/></svg>
-      Maria’s Organics
+      <img src="img/logo2.png" alt="Maria’s Mushroom Farm logo" class="brand-logo">
+      <div class="brand-header">Maria’s Mushroom Farm</div>
     </div>
     <a href="index.html" class="back-btn"><i class="fas fa-angle-left"></i> Back</a>
   </nav>
@@ -78,15 +234,21 @@
   <!-- Content -->
   <main class="container">
     <div class="grid">
-      <div class="card"><div id="recipePhoto" class="recipe-photo"></div></div>
+      <div class="card">
+        <div id="recipePhoto" class="recipe-photo"></div>
+      </div>
       <div class="card-body">
         <h3>Ingredients</h3>
-        <div class="ingredients"><ul id="ingredientsList"></ul></div>
+        <div class="ingredients">
+          <ul id="ingredientsList"></ul>
+        </div>
 
         <h3>Instructions</h3>
         <p id="instructionsText"></p>
 
-        <button class="btn-print" onclick="window.print()"><i class="fas fa-print"></i> Print Recipe</button>
+        <button class="btn-print" onclick="window.print()">
+          <i class="fas fa-print"></i> Print Recipe
+        </button>
       </div>
     </div>
   </main>
@@ -96,29 +258,33 @@
 
   <!-- Script -->
   <script>
-    document.getElementById('year').textContent=new Date().getFullYear();
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-    const nav=document.getElementById('mainNav');
-    const banner=document.getElementById('banner');
-    new IntersectionObserver(entries=>{
-      entries.forEach(e=>nav.classList.toggle('scrolled',!e.isIntersecting));
+    const nav = document.getElementById('mainNav');
+    const banner = document.getElementById('banner');
+    new IntersectionObserver(entries => {
+      entries.forEach(e => nav.classList.toggle('scrolled', !e.isIntersecting));
     }).observe(banner);
 
-    const qs=key=>new URLSearchParams(location.search).get(key);
-    async function loadRecipe(){
-      const id=qs('id');
-      const res=await fetch('data/recipes.json');
-      const data=await res.json();
-      const r=data.find(el=>el.id===id);
-      if(!r){document.body.innerHTML='<p style="padding:2rem">Recipe not found.</p>';return;}
+    const qs = key => new URLSearchParams(location.search).get(key);
+    async function loadRecipe() {
+      const id = qs('id');
+      const res = await fetch('data/recipes.json');
+      const data = await res.json();
+      const r = data.find(el => el.id === id);
+      if (!r) {
+        document.body.innerHTML = '<p style="padding:2rem">Recipe not found.</p>';
+        return;
+      }
 
-      document.title=r.title+' • Maria’s Organics';
-      recipeTitle.textContent=r.title;
-      recipeSubtitle.innerHTML=`<i class='far fa-clock'></i> ${r.time} &nbsp;|&nbsp; <i class='fas fa-user-friends'></i> ${r.servings}`;
+      document.title = r.title + ' • Maria’s Organics';
+      recipeTitle.textContent = r.title;
+      recipeSubtitle.innerHTML = `<i class='far fa-clock'></i> ${r.time} &nbsp;|&nbsp; <i class='fas fa-user-friends'></i> ${r.servings}`;
       document.getElementById('recipePhoto').style.backgroundImage = `url('${r.image}')`;
-      ingredientsList.innerHTML=r.ingredients.map(i=>`<li>${i}</li>`).join('');
-      instructionsText.textContent=r.instructions;
+      ingredientsList.innerHTML = r.ingredients.map(i => `<li>${i}</li>`).join('');
+      instructionsText.textContent = r.instructions;
     }
+
     loadRecipe();
   </script>
 </body>
